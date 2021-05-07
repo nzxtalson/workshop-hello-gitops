@@ -13,4 +13,4 @@ spec:
           - path: /
             backend:
               serviceName: hello-gitops
-              servicePort: http
+              servicePort: 80
