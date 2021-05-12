@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: nzxtalson/hello-gitops
-  newTag: 5b3750feecd84ba775df5cbef989bdb408cee11e
+  newTag: b77e408ad5df86bcf794d471cc698357f566014b
