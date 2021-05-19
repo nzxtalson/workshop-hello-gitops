@@ -1,0 +1,24 @@
+apiVersion: autoscaling/v1
+# you can use kubectl command to crate hpa resource as below:
+# kubectl autoscale deployment [deployment name] --min=2 --max=10 --cpu-percent=50 --namespace=nzxt-web-api
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-gitops-hpa
+spec:
+  maxReplicas: 20
+  minReplicas: 1
+  # The scale target template config must be conatin resource section like below
+  # resources:
+  #   limit:
+  #     cpu: 100m
+  #   requests:
+  #     cpu: 200m
+
+  # reference
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container
+
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-gitops
+  targetCPUUtilizationPercentage: 50
