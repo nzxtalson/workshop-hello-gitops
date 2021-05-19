@@ -21,3 +21,8 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+          resources:
+            requests:
+              cpu: "300m"   # The expression 0.2 is equivalent to the expression 200m , which mean the pod can use 20% of cpu
+            limits:
+              cpu: "500m"
