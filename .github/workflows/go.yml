@@ -76,9 +76,10 @@ jobs:
     - name: Commit files
       run: |
         cd ${{env.ARGOCD-CONFIG-PATH}}
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "update kustomize file from ${GITHUB_REPOSITORY}"
+        git commit -am "update kustomize file from ${GITHUB_REPOSITORY} with sha ${{ steps.vars.outputs.sha_short }}"
       # pwd
       # env
 
