@@ -45,7 +45,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
       with:
-        repository: $env.ARGOCD-REPOSITORY-URL
+        repository: $ARGOCD-REPOSITORY-URL
         token: ${{ secrets.ARGO_REPO_ACCESS_TOKEN }}
         path: $ARGOCD-CONFIG-PATH
 
