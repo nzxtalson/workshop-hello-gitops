@@ -75,6 +75,7 @@ jobs:
     #     excludes: README.md:.git:path/deeper/in/the/repo        
     - name: Commit files
       run: |
+        cd ${{env.ARGOCD-CONFIG-PATH}}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
