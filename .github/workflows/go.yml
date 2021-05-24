@@ -58,7 +58,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
-       cd ${{ARGOCD-CONFIG-PATH}}/kustomize/base
+       cd ${{env.ARGOCD-CONFIG-PATH}}/kustomize/base
        kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
     # - name: Commit to state repository
