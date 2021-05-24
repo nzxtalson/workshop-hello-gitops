@@ -78,7 +78,7 @@ jobs:
         cd ${{env.ARGOCD-CONFIG-PATH}}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "Bump docker tag"
+        git commit -am "update kustomize file from ${GITHUB_REPOSITORY}"
       # pwd
       # env
 
@@ -87,5 +87,5 @@ jobs:
       with:
         github_token: ${{ secrets.ARGO_REPO_ACCESS_TOKEN }}
         repository: ${{env.ARGOCD-REPOSITORY-URL}}
-        barnch: main
+        branch: main
         directory: ${{env.ARGOCD-CONFIG-PATH}}
