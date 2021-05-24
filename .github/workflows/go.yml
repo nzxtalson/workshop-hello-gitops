@@ -79,7 +79,7 @@ jobs:
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "update kustomize file from ${GITHUB_REPOSITORY} with sha ${{ steps.vars.outputs.sha_short }}"
+        git commit -am "update kustomize file from ${GITHUB_REPOSITORY} with sha ${GITHUB_SHA::8}"
       # pwd
       # env
 
