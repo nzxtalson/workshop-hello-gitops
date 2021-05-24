@@ -60,7 +60,7 @@ jobs:
         destination-branch: main
         git-user: "Git User"
         git-user-email: git-user@email.com
-        git-commit-message: "Commit change from ${{GITHUB_REPOSITORY}}"
+        git-commit-message: "Commit change from $GITHUB_REPOSITORY"
         git-commit-sign-off: "false"
         excludes: README.md:.git:path/deeper/in/the/repo        
     # - name: Commit files
