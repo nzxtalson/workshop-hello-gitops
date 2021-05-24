@@ -34,10 +34,20 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     needs: build
+    env:
+      ARGOCD-CONFIG-PATH: argocd-config
+      ARGOCD-REPOSITORY-URL: nzxtalson/argo-config
 
     steps:
     - name: Check out code
       uses: actions/checkout@v2
+
+    - name: Check out code
+      uses: actions/checkout@v2
+      with:
+        repository: $env.ARGOCD-REPOSITORY-URL
+        toekn: ${{ secrets.ARGO_REPO_ACCESS_TOKEN }}
+        path: $env.ARGOCD-CONFIG-PATH
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
@@ -48,26 +58,29 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
-       cd kustomize/base
+       cd ${ARGOCD-CONFIG-PATH}/kustomize/base
        kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
        cat kustomization.yaml
-    - name: Commit to state repository
-      uses: drud/action-cross-commit@master
-      with:
-        source-folder: kustomize/base
-        destination-repository: https://nzxtalson:${{ secrets.ARGO_REPO_ACCESS_TOKEN }}@github.com/nzxtalson/argo-config
-        destination-folder: kustmize/base
-        destination-branch: main
-        git-user: "Git User"
-        git-user-email: git-user@email.com
-        git-commit-message: "Commit change from $GITHUB_REPOSITORY"
-        git-commit-sign-off: "false"
-        excludes: README.md:.git:path/deeper/in/the/repo        
-    # - name: Commit files
-    #   run: |
-    #     git config --local user.email "action@github.com"
-    #     git config --local user.name "GitHub Action"
-    #     git commit -am "Bump docker tag"
+    # - name: Commit to state repository
+    #   uses: drud/action-cross-commit@master
+    #   with:
+    #     source-folder: kustomize/base
+    #     destination-repository: https://nzxtalson:${{ secrets.ARGO_REPO_ACCESS_TOKEN }}@github.com/nzxtalson/argo-config
+    #     destination-folder: kustmize/base
+    #     destination-branch: main
+    #     git-user: "Git User"
+    #     git-user-email: git-user@email.com
+    #     git-commit-message: "Commit change from $GITHUB_REPOSITORY"
+    #     git-commit-sign-off: "false"
+    #     excludes: README.md:.git:path/deeper/in/the/repo        
+    - name: Commit files
+      run: |
+        pwd
+        env
+
+      # git config --local user.email "action@github.com"
+      # git config --local user.name "GitHub Action"
+      # git commit -am "Bump docker tag"
 
     # - name: Push changes
     #   uses: ad-m/github-push-action@master
