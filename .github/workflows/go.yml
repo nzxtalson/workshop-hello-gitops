@@ -46,8 +46,8 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: $env.ARGOCD-REPOSITORY-URL
-        toekn: ${{ secrets.ARGO_REPO_ACCESS_TOKEN }}
-        path: $env.ARGOCD-CONFIG-PATH
+        token: ${{ secrets.ARGO_REPO_ACCESS_TOKEN }}
+        path: $ARGOCD-CONFIG-PATH
 
     - name: Setup Kustomize
       uses: imranismail/setup-kustomize@v1
